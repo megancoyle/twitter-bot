@@ -9,42 +9,33 @@ const config = {
 };
 const Twitter = new twit(config);
 
-let retweet = function() {
-  let params = {
-    q: "#art, #painting",
-    result_type: "mixed",
-    lang: "en"
-  };
-  Twitter.get("search/tweets", params, function(err, data) {
-    // if there is no error
-    if (!err) {
-      // loop through the first 4 returned tweets
-      for (let i = 0; i < 4; i++) {
-        // iterate through those first four defining a rtId that is equal to the value of each of those tweets' ids
-        let rtId = data.statuses[i].id_str;
-        // the post action
-        Twitter.post(
-          "statuses/retweet/:id",
-          {
-            // setting the id equal to the rtId variable
-            id: rtId
-            // log response and log error
-          },
-          function(err, response) {
-            if (response) {
-              console.log("Successfully retweeted");
-            }
-            if (err) {
-              console.log(err);
-            }
-          }
-        );
+const MAX_RT_COUNT = 1;
+
+let retweet = async function() {
+  try {
+    const { data } = await Twitter.get("search/tweets", {
+      q: "#art, #painting",
+      result_type: "mixed",
+      lang: "en"
+    });
+
+    const statuses = data.statuses.slice(0, MAX_RT_COUNT);
+
+    // loop through the first n returned tweets
+    for (const status of statuses) {
+      // the post action
+      const response = await Twitter.post("statuses/retweet/:id", {
+        id: status.id_str
+      });
+
+      if (response) {
+        console.log("Successfully retweeted");
       }
-    } else {
-      // catch all log if the search could not be executed
-      console.log("Could not search tweets.");
     }
-  });
+  } catch (err) {
+    // catch all log if the search/retweet could not be executed
+    console.error("Err:", err);
+  }
 };
 
 retweet();
