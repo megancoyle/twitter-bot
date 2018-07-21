@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const _ = require("lodash");
 const twit = require("twit");
 const config = {
   consumer_key: process.env.CONSUMER_KEY,
@@ -10,8 +11,9 @@ const config = {
 const Twitter = new twit(config);
 
 const MAX_RT_COUNT = 1;
+const USERS = ["15057943", "5225991", "22009731"];
 
-let retweet = async function() {
+let retweetTags = async function() {
   try {
     const { data } = await Twitter.get("search/tweets", {
       q: "#art, #painting",
@@ -38,5 +40,31 @@ let retweet = async function() {
   }
 };
 
-retweet();
-setInterval(retweet, 600000);
+// retweetTags();
+// setInterval(retweetTags, 600000);
+
+let retweetUsers = async function() {
+  try {
+    const { data } = await Twitter.get("users/show", {
+      user_id: _.sample(USERS)
+    });
+
+    const status = data.status;
+
+    // make sure tweet isn't in reply to another user
+    if (status.in_reply_to_status_id == null) {
+      const response = await Twitter.post("statuses/retweet/:id", {
+        id: status.id_str
+      });
+
+      if (response) {
+        console.log("Successfully retweeted");
+      }
+    }
+  } catch (err) {
+    // catch all log if the search/retweet could not be executed
+    console.error("Err:", err);
+  }
+};
+
+retweetUsers();
