@@ -1,6 +1,5 @@
 require("dotenv").config();
 
-const _ = require("lodash");
 const twit = require("twit");
 const config = {
   consumer_key: process.env.CONSUMER_KEY,
@@ -11,7 +10,31 @@ const config = {
 const Twitter = new twit(config);
 
 const MAX_RT_COUNT = 1;
-const USERS = ["15057943", "5225991", "22009731"];
+
+const USERS = [
+  "15057943", // moma
+  "14803372", // saam
+  "5225991", // tate
+  "22009731", // design museum
+  "81783051", // artsy
+  "17896874", // itsnicethat
+  "158865339", // fastcodesign
+  "21661279", // creative review
+  "16336998", // print magazine
+  "17623957", // design observer
+  "418597196", // creativebloq
+  "15446126", // design milk
+  "18201801", // interior design
+  "19038849" // how design
+];
+
+const getUserOfTheDay = () => {
+  let date = new Date();
+  let dayOfMonth = date.getDate();
+  let pickUserIndex = dayOfMonth % USERS.length;
+
+  return USERS[pickUserIndex];
+};
 
 let retweetTags = async function() {
   try {
@@ -46,17 +69,14 @@ let retweetTags = async function() {
 let retweetUsers = async function() {
   try {
     const { data } = await Twitter.get("users/show", {
-      user_id: _.sample(USERS)
+      user_id: getUserOfTheDay()
     });
-
     const status = data.status;
-
     // make sure tweet isn't in reply to another user
     if (status.in_reply_to_status_id == null) {
       const response = await Twitter.post("statuses/retweet/:id", {
         id: status.id_str
       });
-
       if (response) {
         console.log("Successfully retweeted");
       }
