@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const http = require("http");
 const twit = require("twit");
 const config = {
   consumer_key: process.env.CONSUMER_KEY,
@@ -36,13 +37,6 @@ const getUserOfTheDay = () => {
   return USERS[pickUserIndex];
 };
 
-let now = new Date();
-let millisTill10 =
-  new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0, 0, 0) - now;
-if (millisTill10 < 0) {
-  millisTill10 += 86400000; // it's after 10am, try 10am tomorrow.
-}
-
 let retweetTags = async function() {
   try {
     const { data } = await Twitter.get("search/tweets", {
@@ -71,7 +65,6 @@ let retweetTags = async function() {
 };
 
 // retweetTags();
-// setInterval(retweetTags, 600000);
 
 let retweetUsers = async function() {
   try {
@@ -95,4 +88,7 @@ let retweetUsers = async function() {
 };
 
 retweetUsers();
-// setTimeout(retweetUsers, millisTill10);
+
+setInterval(function() {
+  http.get("https://twitterbot-retweet.herokuapp.com/");
+}, 86400000); // checks app every 24 hours
