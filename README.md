@@ -18,7 +18,7 @@ I started off by creating a function for my bot to retweet tweets with a specifi
 
 In order to allow the bot to work automatically, I deployed it to Heroku.
 
-### User Stories
+## User Stories
 
 - As a user, I want a bot that can retweet tweets from specific Twitter users.
 - As a user, I want a bot that won't retweet tweets it has already tweeted.
