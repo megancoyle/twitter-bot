@@ -12,9 +12,9 @@ Twitter-bot is a bot I made to help streamline my marketing for [my artwork](htt
 
 ## Approach
 
-I knew that I wanted to build something that could make my life easier. I feel like I've spent too many hours trying to create a social media marketing strategy, when I really should focus more energy and effort creating better artwork. Thus I decided to explore building bots to make my social media marketing more automated.
+I knew that I wanted to build something that could make my life easier. I feel like I've spent too many hours trying to create a social media marketing strategy, when I really should focus more energy and effort creating better artwork. Thus I decided to explore building bots to automate my social media marketing.
 
-I started off by creating a function that could allow my bot to retweet tweets with a specific hashtag. Then I decided that I wanted to create a function to retweet tweets from a list of users. I identified the users only by their Twitter ids, since users always have the ability to change their screen names (this is also why I included comments with info on what accounts are associated with the different ids)
+I started off by creating a function for my bot to retweet tweets with a specific hashtag. Then I created a function to retweet tweets from a list of users. I identified the users by their Twitter ids, since users always have the ability to change their screen names (this is also why I included comments with info on what accounts are associated with the different ids)
 
 In order to allow the bot to work automatically, I deployed it to Heroku.
 
