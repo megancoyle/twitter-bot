@@ -18,8 +18,8 @@ const USERS = [
   "5225991", // tate
   "22009731", // design museum
   "81783051", // artsy
-  "17896874", // itsnicethat
   "158865339", // fastcodesign
+  "20457080", // nga
   "21661279", // creative review
   "16336998", // print magazine
   "17623957", // design observer
