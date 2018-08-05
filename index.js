@@ -24,7 +24,7 @@ const USERS = [
   "16336998", // print magazine
   "17623957", // design observer
   "418597196", // creativebloq
-  "15446126", // design milk
+  "16517711", // whitneymuseum
   "18201801", // interior design
   "19038849" // how design
 ];
