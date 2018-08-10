@@ -26,7 +26,8 @@ const USERS = [
   "418597196", // creativebloq
   "16517711", // whitneymuseum
   "18201801", // interior design
-  "19038849" // how design
+  "19038849", // how design
+  "2991948728" // thenewpainting
 ];
 
 const getUserOfTheDay = () => {
