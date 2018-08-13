@@ -20,10 +20,8 @@ const USERS = [
   "81783051", // artsy
   "158865339", // fastcodesign
   "20457080", // nga
-  "21661279", // creative review
-  "16336998", // print magazine
-  "17623957", // design observer
-  "418597196", // creativebloq
+  "24691376", // vangoghmuseum
+  "17057271", // themet
   "16517711", // whitneymuseum
   "18201801", // interior design
   "19038849", // how design
